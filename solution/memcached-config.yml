@@ -1,0 +1,8 @@
+integration_name: com.newrelic.memcached
+
+instances:
+  - name: memcached_monitor
+    command: memcached
+    arguments:
+      MEMCACHED_HOST: localhost
+      MEMCACHED_PORT: 11211

@@ -1,0 +1,22 @@
+{
+  "name": "com.newrelic.memcached",
+  "protocol_version": "1",
+  "integration_version": "1.0.0",
+  "metrics": [
+    {
+      "event_type": "MemcachedSample",
+      "Uptime": uptime,
+      "currConnections": curr_connections,
+      "listenDisabledNum": listen_disabled_num,
+      "connYields": conn_yields,
+      "cmdGets": cmd_get,
+      "cmdSets": cmd_set,
+      "cmdFlushes": cmd_flush,
+      "bytesRead": bytes_read,
+      "bytesWritten": bytes_written,
+      "getHits": get_hits,
+      "evictionCount": evictions,
+      "limitMaxBytes": limit_maxbytes
+    }
+  ]
+}

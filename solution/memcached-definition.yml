@@ -1,0 +1,11 @@
+name: com.newrelic.memcached
+protocol_version: 1
+description: Reports typical memcached stats
+os: linux
+
+commands:
+  memcached:
+    command:
+      - ./memcached.sh
+    interval: 90
+    prefix: custom/memcached

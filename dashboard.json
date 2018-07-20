@@ -1,0 +1,162 @@
+{
+  "dashboard": {
+    "title": "Memcached Performance",
+    "description": null,
+    "icon": "dashboard",
+    "visibility": "all",
+    "editable": "editable_by_all",
+    "metadata": {
+      "version": 1
+    },
+    "widgets": [
+      {
+        "visualization": "billboard",
+        "layout": {
+          "width": 1,
+          "height": 1,
+          "row": 1,
+          "column": 1
+        },
+        "data": [
+          {
+            "nrql": "SELECT latest(Uptime) FROM MemcachedSample SINCE 5 minutes ago"
+          }
+        ],
+        "presentation": {
+          "title": "Uptime (seconds)",
+          "notes": null,
+          "threshold": {}
+        }
+      },
+      {
+        "visualization": "billboard",
+        "layout": {
+          "width": 1,
+          "height": 1,
+          "row": 1,
+          "column": 2
+        },
+        "data": [
+          {
+            "nrql": "FROM MemcachedSample SELECT latest(listenDisabledNum) as 'Max Connection Count' SINCE 3 hours ago"
+          }
+        ],
+        "presentation": {
+          "title": "Max Connections Reached (count)",
+          "notes": "This metric counts the number of times:\ni) the max number of connections is reached\nii) a new connection had to wait in the queue as a result.",
+          "threshold": {}
+        }
+      },
+      {
+        "visualization": "line_chart",
+        "layout": {
+          "width": 1,
+          "height": 1,
+          "row": 1,
+          "column": 3
+        },
+        "data": [
+          {
+            "nrql": "FROM MemcachedSample SELECT average(connYields) as 'Throttle Count' TIMESERIES AUTO SINCE 3 hours ago"
+          }
+        ],
+        "presentation": {
+          "title": "Throttle Count",
+          "notes": "Number of times a client connection was throttled.\nWhen sending GETs in batch mode and the connection contains too many requests (limited by -R parameter) the connection might be throttled to prevent starvation."
+        }
+      },
+      {
+        "visualization": "line_chart",
+        "layout": {
+          "width": 2,
+          "height": 1,
+          "row": 2,
+          "column": 1
+        },
+        "data": [
+          {
+            "nrql": "FROM MemcachedSample SELECT average(currConnections) SINCE 3 hours ago TIMESERIES 30 minutes"
+          }
+        ],
+        "presentation": {
+          "title": "Current Connections",
+          "notes": "Number of connected clients. If none (or too many) then something is wrong."
+        }
+      },
+      {
+        "visualization": "line_chart",
+        "layout": {
+          "width": 1,
+          "height": 1,
+          "row": 2,
+          "column": 3
+        },
+        "data": [
+          {
+            "nrql": "FROM MemcachedSample SELECT average(cmdGets) as 'Executed GETs', average(cmdSets) as 'Executed SETs', average(cmdFlushes) as 'Executed Flushes' SINCE 3 hours ago TIMESERIES"
+          }
+        ],
+        "presentation": {
+          "title": "Executed Commands",
+          "notes": null
+        }
+      },
+      {
+        "visualization": "attribute_sheet",
+        "layout": {
+          "width": 1,
+          "height": 1,
+          "row": 3,
+          "column": 1
+        },
+        "data": [
+          {
+            "nrql": "SELECT average(bytesRead) as 'Bytes Read', average(bytesWritten) as 'Bytes Written' FROM MemcachedSample SINCE 3 hours ago"
+          }
+        ],
+        "presentation": {
+          "title": "Bytes Read/Written in Cache",
+          "notes": null
+        }
+      },
+      {
+        "visualization": "billboard",
+        "layout": {
+          "width": 1,
+          "height": 1,
+          "row": 3,
+          "column": 2
+        },
+        "data": [
+          {
+            "nrql": "SELECT average((getHits/cmdGets)) as 'Hit Rate' FROM MemcachedSample SINCE 3 hours ago"
+          }
+        ],
+        "presentation": {
+          "title": "Avg Hit Rate",
+          "notes": "This is a calculated metric: get_hits / cmd_get. It indicates how efficient your Memcached server is.",
+          "threshold": {}
+        }
+      },
+      {
+        "visualization": "line_chart",
+        "layout": {
+          "width": 1,
+          "height": 1,
+          "row": 3,
+          "column": 3
+        },
+        "data": [
+          {
+            "nrql": "SELECT average(evictionCount) FROM MemcachedSample SINCE 3 hours ago TIMESERIES 15 minutes"
+          }
+        ],
+        "presentation": {
+          "title": "Avg Eviction Count",
+          "notes": "An eviction is when an item that still has time to live is removed from the cache because a brand new item needs to be allocated. A high number of evictions coupled with a low hit rate is setting a large number of keys that are never used again."
+        }
+      }
+    ],
+    "filter": null
+  }
+}
