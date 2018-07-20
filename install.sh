@@ -2,7 +2,7 @@
 # If the installer fails, change #!/bin/bash to #!/bin/sh
 
 . ./install.config
-SCRIPTDIR='~/infra-memcached/solution'
+SCRIPTDIR='~/memcached-ohi/solution'
 
 printf "Installing $INTEGRATION_NAME Extension...\n"
 
