@@ -1,6 +1,9 @@
 # Infra-Memcached
 New Relic Infrastructure extension to report useful memcached stats. This integration uses `memcached-tool stats` to collect performance counters.
 
+## Disclaimer
+New Relic has open-sourced this integration to enable monitoring of this technology. This integration is provided AS-IS WITHOUT WARRANTY OR SUPPORT, although you can report issues and contribute to this integration via GitHub. Support for this integration is available with an [Expert Services subscription](newrelic.com/expertservices).
+
 ## Pre-reqs
 * Infrastructure agent installed
 * A server w/ Memcached installed
